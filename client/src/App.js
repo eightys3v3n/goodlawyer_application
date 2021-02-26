@@ -1,7 +1,3 @@
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import './App.css';
 import React, { createElement, Component } from 'react';
 
@@ -18,12 +14,32 @@ class LoginForm extends Component {
   }
 
   handleChange(event) {
-    this.setState({username: event.target.value});
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    // ES6 only.
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit(event) {
-    console.log('Your login details are: ' + this.state.username);
+    console.log('Your login details are: ' + this.state.username + ':' + this.state.password);
     event.preventDefault();
+
+    fetch("http://localhost:3000/api/login")
+      .then(res => res.json())
+      .then((result) => {
+        if (result.success !== true) {
+          alert("WRONG");
+        } else {
+          alert("success :D");
+        }},
+        (error) => {
+          alert("Errors errors errors");
+        }
+      );
   }
 
   render() {
