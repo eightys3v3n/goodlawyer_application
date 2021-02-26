@@ -1,11 +1,21 @@
 /*eslint-env es6*/
 
+const crypto = require('crypto');
+const fs = require('fs');
+const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/api');
 const path = require('path');
 require('dotenv').config();
+
+let privateKey = fs.readFileSync('../key.pem').toString();
+let certificate = fs.readFileSync('../cert.pem').toString();
+let opts = {
+  key: privateKey,
+  cert: certificate,
+};
 
 const app = express();
 const port = process.env.PORT || 3080;
@@ -31,6 +41,7 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(port, () => {
+let server = https.createServer(opts, app);
+server.listen(port, () => {
     console.log(`Server listening on the port ${port}`);
 });
