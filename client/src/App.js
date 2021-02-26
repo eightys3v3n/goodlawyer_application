@@ -29,33 +29,33 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <MuiThemeProvider>
-          <AppBar
-            title="Login" />
-          <section id="login_form">
-            <form onSubmit={this.handleSubmit}>
-              <label>
-                Username:
-                <input
-                  type="text"
-                  name="username"
-                  value={this.state.value}
-                  onChange={this.handleChange} />
-              </label>
-              <br />
-              <label>
-                Password:
-                <input
-                  type="password"
-                  name="password"
-                  value={this.state.value}
-                  onChange={this.handleChange} />
-              </label>
-              <br />
-              <input type="submit" value="Submit" />
-            </form>
-          </section>
-        </MuiThemeProvider>
+        <header className="Login">
+          <h1>Login to my page</h1>
+          <title>Login</title>
+        </header>
+        <section id="login_form">
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Username:
+              <input
+                type="text"
+                name="username"
+                value={this.state.value}
+                onChange={this.handleChange} />
+            </label>
+            <br />
+            <label>
+              Password:
+              <input
+                type="password"
+                name="password"
+                value={this.state.value}
+                onChange={this.handleChange} />
+            </label>
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+        </section>
       </div>
     );
   }
