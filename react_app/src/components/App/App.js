@@ -6,6 +6,7 @@ import './App.css';
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Secret from "../Secret/Secret";
+import Logout from "../Logout/Logout";
 
 
 export default function App() {
@@ -22,6 +23,9 @@ export default function App() {
           </Route>
           <Route path="/secret">
             <Secret />
+          </Route>
+          <Route path="/logout">
+            <Logout />
           </Route>
         </Switch>
       </BrowserRouter>

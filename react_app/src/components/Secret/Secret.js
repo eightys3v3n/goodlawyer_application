@@ -7,15 +7,17 @@ import Token from "../App/Token";
 
 
 export default function Secret() {
-  const { token, setToken } = Token();
+  const { token, setToken, removeToken } = Token();
   console.log("Using token "+token);
 
   if (!token) {
-    return <Login setToken={setToken}/>
+    return <Login />
   }
 
   return (
-    <h1>Secret</h1>
-    <p>Your login token is {token}<p/>
+    <div>
+      <h1>Secret</h1>
+      <p>You can only view this page if you are logged in.</p>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import Token from "../App/Token";
 
 // import './Login.css';
 
@@ -16,9 +16,10 @@ async function loginUser(creds) {
 }
 
 
-export default function Login({ setToken }) {
+export default function Login() {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  const { token, setToken, removeToken } = Token();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -31,11 +32,7 @@ export default function Login({ setToken }) {
     console.log(res);
 
     if (res.success) {
-      if (setToken) {
-        setToken(res.token);
-      } else {
-        alert("Logged in");
-      }
+      setToken(res.token);
     } else {
       alert("Failed to login: "+res.status);
     }
@@ -71,7 +68,3 @@ export default function Login({ setToken }) {
     </div>
   );
 }
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-};
