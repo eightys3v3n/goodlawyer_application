@@ -12,4 +12,4 @@ const UserSchema = new Schema({
     }
 })
 
-const User = mongoose.model('Login', UserSchema);
+const User = mongoose.model('User', UserSchema);
