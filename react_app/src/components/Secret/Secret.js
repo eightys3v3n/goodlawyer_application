@@ -11,7 +11,7 @@ export default function Secret() {
   console.log("Using token "+token);
 
   if (!token) {
-    return <Login />
+    return <Login setToken={setToken}/>
   }
 
   return (

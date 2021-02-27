@@ -16,10 +16,18 @@ async function loginUser(creds) {
 }
 
 
-export default function Login() {
+export default function Login({ setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-  const { token, setToken, removeToken } = Token();
+  let token = null,
+      removeToken = null;
+
+  if (!setToken) {
+    console.log("creating setToken");
+    const tokenStuff = Token();
+    token = tokenStuff[0];
+    setToken = tokenStuff.setToken;
+  }
 
   const handleSubmit = async event => {
     event.preventDefault();

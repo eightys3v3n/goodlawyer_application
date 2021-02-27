@@ -16,7 +16,6 @@ export default function Token() {
 
   const removeToken = () => {
     sessionStorage.removeItem('token');
-    setToken();
   };
 
   const saveToken = token => {
