@@ -1,0 +1,14 @@
+basic login system in react
+connected to node server
+secure password storage
+using mongodb
+host if i have time
+
+* ToDo
+** Setup
+   - MongoDB
+   - NodeJS as a server
+   - HTTPS with trusted certificate?
+   - React
+
+

@@ -2,15 +2,20 @@ const crypto = require('crypto'),
       fs = require('fs'),
       https = require('https'),
       express = require('express'),
-      express_session = require('express-session'),
+      expressSession = require('express-session')({
+        secret: 'secret_Stuff_here',
+        resave: false,
+        saveUninitialized: false
+      }),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
       path = require('path'),
       passport = require('passport'),
       localStrategy = require('passport-local'),
       passportLocalMongoose = require('passport-local-mongoose'),
+      cors = require('cors'),
       routes = require('./routes/api'),
-      user = require('./models/user');
+      User = require('./models/user');
 require('dotenv').config();
 
 
@@ -33,24 +38,35 @@ let opts = {
 };
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(require('express-session') ({
-  secret: 'Secret text',
-  resave: false,
-  saveUninitialized: false
-}))
+app.use(bodyParser.json());
+
+
+// CORS for API accessing
+app.use(cors());
+let whitelist = ['https://localhost:3000', 'https://localhost:3080'];
+let corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin !== -1)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
 
 // Logins
+app.use(expressSession);
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new localStrategy(user.authenticate()));
-passport.serializeUser(user.serializeUser());
-passport.deserlializeUser(user.deserializeUser());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 // ROUTES
-app.use('/api', routes);
+app.use('/', routes);
 
 app.use((err, req, res, next) => {
   console.log(err);
