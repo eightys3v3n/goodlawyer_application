@@ -14,8 +14,8 @@ const crypto = require('crypto'),
       localStrategy = require('passport-local'),
       passportLocalMongoose = require('passport-local-mongoose'),
       cors = require('cors'),
-      routes = require('./routes/login'),
-      user = require('./models/user');
+      routes = require('./routes/api'),
+      User = require('./models/user');
 require('dotenv').config();
 
 
@@ -38,7 +38,7 @@ let opts = {
 };
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 
 // CORS for API accessing
@@ -54,14 +54,23 @@ let corsOptions = {
   }
 };
 
+
 // Logins
 app.use(expressSession);
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(user.createStrategy());
-passport.serializeUser(user.serializeUser());
-passport.deserlializeUser(user.deserializeUser());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// Create a default user for testing
+async function defaultUser() {
+  const a_user = new User({username: 'eightys3v3n'});
+  await a_user.setPassword('Abc123456');
+  await a_user.save();
+}
+defaultUser();
 
 
 // ROUTES

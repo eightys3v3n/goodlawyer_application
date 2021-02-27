@@ -44,9 +44,9 @@ app.use(require('express-session') ({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new localStrategy(user.authenticate()));
-passport.serializeUser(user.serializeUser());
-passport.deserlializeUser(user.deserializeUser());
+// passport.use(new localStrategy(user.authenticate()));
+// passport.serializeUser(user.serializeUser());
+// passport.deserlializeUser(user.deserializeUser());
 
 
 // ROUTES

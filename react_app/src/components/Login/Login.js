@@ -11,7 +11,7 @@ async function loginUser(creds) {
     },
     body: JSON.stringify(creds)
   })
-    .then(data => data.json())
+    .then(data => data.json());
 }
 
 
@@ -26,6 +26,9 @@ export default function Login({ setToken }) {
       username,
       password
     });
+
+    console.log(res);
+
     if (res.success) {
       setToken(res.token);
     } else {
