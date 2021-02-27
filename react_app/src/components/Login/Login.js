@@ -1,4 +1,5 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // import './Login.css';
 
@@ -30,7 +31,11 @@ export default function Login({ setToken }) {
     console.log(res);
 
     if (res.success) {
-      setToken(res.token);
+      if (setToken) {
+        setToken(res.token);
+      } else {
+        alert("Logged in");
+      }
     } else {
       alert("Failed to login: "+res.status);
     }
@@ -66,3 +71,7 @@ export default function Login({ setToken }) {
     </div>
   );
 }
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
