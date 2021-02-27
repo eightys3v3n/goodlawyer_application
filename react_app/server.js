@@ -64,14 +64,6 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Create a default user for testing
-async function defaultUser() {
-  const a_user = new User({username: 'eightys3v3n'});
-  await a_user.setPassword('Abc123456');
-  await a_user.save();
-}
-defaultUser();
-
 
 // ROUTES
 app.use('/', routes);

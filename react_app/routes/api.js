@@ -41,10 +41,26 @@ router.post('/login', (req, res, next) => {
 
 
 async function register(username, password) {
-  const new_user = new User({username: username});
-  await new_user.setPassword(password);
-  await new_user.save();
-  return new_user;
+  let res = {
+    username: username
+  };
+
+  let existingUsers = await User.findOne({username: username}).exec();
+  if (existingUsers == null) {
+    res = {
+      ...res,
+      success: true,
+      status: "Registered"
+    }
+  } else {
+    res = {
+      ...res,
+      success: false,
+      status: "Username already exists"
+    }
+  }
+
+  return res;
 }
 
 
@@ -62,18 +78,19 @@ router.get('/register', (req, res, next) => {
 router.post('/register', (req, res, next) => {
   register(req.body.username, req.body.password)
     .then(registerRes => {
-      console.log("Registered new user '"+registerRes.username);
-      // if (registerRes.user) {
-      //   res.send({
-      //     status: "Registered",
-      //     success: true,
-      //   });
-      // } else {
-      //   res.send({
-      //     status: registerRes.error.message,
-      //     success: false,
-      //   });
-      // }
+      console.log(registerRes);
+
+      if (registerRes.success) {
+        console.log("Registered new user '"+
+                    registerRes.username+
+                    "'");
+      } else {
+        console.log("Failed to register new user '"+
+                    registerRes.username+
+                    "' because "+
+                    registerRes.status);
+      }
+      res.send(registerRes);
       next();
     });
 });
