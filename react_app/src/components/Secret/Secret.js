@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import Token from "../App/Token";
 
 
+// Displays a page that only loads when a user is logged in
 export default function Secret() {
   const { token, setToken, removeToken } = Token();
   console.log("Using token "+token);

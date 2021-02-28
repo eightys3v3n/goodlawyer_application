@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import "./NavBar.css";
 
 
+// The navigation bar for every page
 export default function NavBar() {
   return (
     <div className="NavBar">

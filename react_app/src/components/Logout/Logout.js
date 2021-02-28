@@ -4,6 +4,7 @@ import Token from "../App/Token";
 import './Logout.css';
 
 
+// Logs a user out when browsed to
 export default function Logout() {
   const { token, setToken, removeToken } = Token();
 

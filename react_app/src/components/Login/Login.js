@@ -4,6 +4,7 @@ import Token from "../App/Token";
 import './Login.css';
 
 
+// Utilizes the API to retrieve a login token
 async function loginUser(creds) {
   return fetch('https://localhost:3080/login', {
     method: 'POST',
@@ -16,6 +17,7 @@ async function loginUser(creds) {
 }
 
 
+// Displays a login page and allows the user to login, handling tokens
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();

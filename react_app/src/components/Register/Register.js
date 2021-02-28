@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './Register.css';
 
 
+// Utilizes the API to register a new user
 async function registerUser(creds) {
   return fetch('https://localhost:3080/register', {
     method: 'POST',
@@ -15,6 +16,7 @@ async function registerUser(creds) {
 }
 
 
+// Displays a registration page
 export default function Register() {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
