@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Token from "../App/Token";
 
 import './Logout.css';
@@ -6,12 +6,12 @@ import './Logout.css';
 
 // Logs a user out when browsed to
 export default function Logout() {
-  const { token, setToken, removeToken } = Token();
+  const tokenStuff = Token();
 
-  removeToken();
+  tokenStuff.removeToken();
 
   return (
-    <div className="root">
+    <div>
       <header className="Logout">
         <h2>Logout</h2>
       </header>

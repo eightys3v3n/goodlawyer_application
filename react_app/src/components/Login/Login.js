@@ -6,6 +6,7 @@ import './Login.css';
 
 // Utilizes the API to retrieve a login token
 async function loginUser(creds) {
+  console.warn("Currenty not validating login tokens on the server. Any non-null token is accepted");
   return fetch('https://localhost:3080/login', {
     method: 'POST',
     headers: {
@@ -21,13 +22,9 @@ async function loginUser(creds) {
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-  let token = null,
-      removeToken = null;
 
   if (!setToken) {
-    console.log("creating setToken");
     const tokenStuff = Token();
-    token = tokenStuff[0];
     setToken = tokenStuff.setToken;
   }
 
@@ -43,17 +40,18 @@ export default function Login({ setToken }) {
 
     if (res.success) {
       setToken(res.token);
+      alert("Logged in successfully");
     } else {
       alert("Failed to login: "+res.status);
     }
   }
 
   return (
-    <div className="root">
+    <div class="body">
       <header className="Login">
         <h2>Login</h2>
       </header>
-      <section className="body">
+      <section className="login-body">
         <form onSubmit={handleSubmit}>
           <label>
             Username:

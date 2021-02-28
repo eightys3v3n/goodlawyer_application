@@ -25,22 +25,25 @@ export default function Register() {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    const res = await registerUser({
-      username,
-      password
-    });
-
-    console.log(res);
-
-    if (res.success) {
-      alert("Successfully registered");
+    if (confirm_password !== password) {
+      alert("Failed to register: Passwords don't match");
     } else {
-      alert("Failed to register: "+res.status);
+      const res = await registerUser({
+        username,
+        password
+      });
+
+      if (res.success) {
+        alert("Successfully registered");
+      } else {
+        console.log(res);
+        alert("Failed to register: "+res.status);
+      }
     }
   }
 
   return (
-    <div className="root">
+    <div>
       <header className="Register">
         <h2>Register</h2>
       </header>

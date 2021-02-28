@@ -9,3 +9,16 @@ input[type="submit"] {
   margin: auto;
   min-width: 100px;
 }
+
+.status {
+  grid-column: 1 / span 2;
+  margin: auto;
+}
+
+.fail {
+  color: red;
+}
+
+.success {
+  color: green;
+}

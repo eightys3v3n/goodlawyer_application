@@ -16,7 +16,9 @@ export default function Secret() {
     content = (
       <section className="body">
         <p>Please login to view this page</p>
-        <Login setToken={setToken}/>
+        <div id="login-root">
+          <Login setToken={setToken}/>
+        </div>
       </section>
     );
   } else {
@@ -28,7 +30,7 @@ export default function Secret() {
   }
 
   return (
-    <div className="root">
+    <div>
       <header className="Secret">
         <h2>Secret</h2>
       </header>
