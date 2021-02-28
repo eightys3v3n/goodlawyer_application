@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Token from "../App/Token";
 
-// import './Logout.css';
+import './Logout.css';
 
 
 export default function Logout() {
@@ -10,13 +10,12 @@ export default function Logout() {
   removeToken();
 
   return (
-    <div>
+    <div className="root">
       <header className="Logout">
-        <h1>Logout</h1>
-        <title>Logout</title>
+        <h2>Logout</h2>
       </header>
-      <section>
-      <p>You have logged out</p>
+      <section className="body">
+        <p>You have logged out</p>
       </section>
     </div>
   );

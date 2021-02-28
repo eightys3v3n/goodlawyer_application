@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Token from "../App/Token";
 
-// import './Login.css';
+import './Login.css';
 
 
 async function loginUser(creds) {
@@ -47,29 +47,26 @@ export default function Login({ setToken }) {
   }
 
   return (
-    <div>
+    <div className="root">
       <header className="Login">
-        <h1>Login</h1>
-        <title>Login</title>
+        <h2>Login</h2>
       </header>
-      <section id="login_form">
+      <section className="body">
         <form onSubmit={handleSubmit}>
           <label>
             Username:
-            <input
-              type="text"
-              name="username"
-              onChange={e => setUserName(e.target.value)} />
           </label>
-          <br />
+          <input
+            type="text"
+            name="username"
+            onChange={e => setUserName(e.target.value)} />
           <label>
             Password:
-            <input
-              type="password"
-              name="password"
-              onChange={e => setPassword(e.target.value)} />
           </label>
-          <br />
+          <input
+            type="password"
+            name="password"
+            onChange={e => setPassword(e.target.value)} />
           <input type="submit" value="Submit" />
         </form>
       </section>

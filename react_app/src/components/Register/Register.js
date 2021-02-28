@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// import './Register.css';
+import './Register.css';
 
 
 async function registerUser(creds) {
@@ -38,37 +38,33 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <div className="root">
       <header className="Register">
-        <h1>Register</h1>
-        <title>Register</title>
+        <h2>Register</h2>
       </header>
-      <section id="register_form">
+      <section className="body">
         <form onSubmit={handleSubmit}>
           <label>
             Username:
-            <input
-              type="text"
-              name="username"
-              onChange={e => setUserName(e.target.value)} />
           </label>
-          <br />
+          <input
+            type="text"
+            name="username"
+            onChange={e => setUserName(e.target.value)} />
           <label>
             Password:
-            <input
-              type="password"
-              name="password"
-              onChange={e => setPassword(e.target.value)} />
           </label>
-          <br />
+          <input
+            type="password"
+            name="password"
+            onChange={e => setPassword(e.target.value)} />
           <label>
             Confirm Password:
-            <input
-              type="password"
-              name="confirm_password"
-              onChange={e => setConfirmPassword(e.target.value)} />
           </label>
-          <br />
+          <input
+            type="password"
+            name="confirm_password"
+            onChange={e => setConfirmPassword(e.target.value)} />
           <input type="submit" value="Submit" />
         </form>
       </section>

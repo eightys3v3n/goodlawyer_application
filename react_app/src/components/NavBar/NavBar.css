@@ -1,0 +1,10 @@
+.NavBar {
+  display: flex;
+  flex: flex-shrink;
+  justify-content: flex-start;
+}
+
+.NavBarElement {
+  padding-left: 10px;
+  padding-right: 10px;
+}
