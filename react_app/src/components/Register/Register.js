@@ -28,6 +28,13 @@ export default function Register() {
     if (confirm_password !== password) {
       alert("Failed to register: Passwords don't match");
     } else {
+      if (password.length < 8) {
+        console.warn("Not enforcing >=8 length passwords for ease of testing");
+      }
+      if (username.length < 8) {
+        console.warn("Not enforcing >=8 length usernames for ease of testing");
+      }
+
       const res = await registerUser({
         username,
         password

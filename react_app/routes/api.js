@@ -21,6 +21,15 @@ async function register(username, password) {
     username: username
   };
 
+  if (password.length < 8) {
+    console.warn("Not enforcing longer than 8 character passwords for ease of testing");
+  }
+
+  if (username.length < 8) {
+    console.warn("Not enforcing longer than 8 character usernames for ease of testing");
+  }
+
+
   let existingUsers = await User.findOne({username: username}).exec();
   if (existingUsers == null) {
     let user = new User({username: username});
