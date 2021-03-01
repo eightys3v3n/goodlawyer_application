@@ -1,11 +1,45 @@
 const express = require('express');
+const sanitize = require('mongo-sanitize');
 const router = express.Router();
 const User = require('../models/user');
 
 
+// Sanitize the inputs then attempt to login
 async function login(username, password) {
+  username = sanitize(username);
+  password = sanitize(password);
   const attempt = await User.authenticate()(username, password);
   return attempt;
+}
+
+
+// Sanitize the inputs then attempt to register a new user.
+async function register(username, password) {
+  username = sanitize(username);
+  password = sanitize(password);
+  let res = {
+    username: username
+  };
+
+  let existingUsers = await User.findOne({username: username}).exec();
+  if (existingUsers == null) {
+    let user = new User({username: username});
+    await user.setPassword(password);
+    await user.save();
+    res = {
+      ...res,
+      success: true,
+      status: "Registered successfully"
+    }
+  } else {
+    res = {
+      ...res,
+      success: false,
+      status: "Username already exists"
+    }
+  }
+
+  return res;
 }
 
 
@@ -38,30 +72,6 @@ router.post('/login', (req, res, next) => {
       next();
     });
 });
-
-
-async function register(username, password) {
-  let res = {
-    username: username
-  };
-
-  let existingUsers = await User.findOne({username: username}).exec();
-  if (existingUsers == null) {
-    res = {
-      ...res,
-      success: true,
-      status: "Registered"
-    }
-  } else {
-    res = {
-      ...res,
-      success: false,
-      status: "Username already exists"
-    }
-  }
-
-  return res;
-}
 
 
 router.get('/register', (req, res, next) => {
