@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import './App.css';
 
@@ -15,21 +15,18 @@ export default function App() {
     <div className="wrapper">
       <h1>Login App</h1>
       <BrowserRouter>
+        <NavBar />
         <Switch>
           <Route path="/login">
-            <NavBar />
             <Login />
           </Route>
           <Route path="/register">
-            <NavBar />
             <Register />
           </Route>
           <Route path="/secret">
-            <NavBar />
             <Secret />
           </Route>
           <Route path="/logout">
-            <NavBar />
             <Logout />
           </Route>
         </Switch>
