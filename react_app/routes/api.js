@@ -2,6 +2,7 @@ const express = require('express');
 const sanitize = require('mongo-sanitize');
 const router = express.Router();
 const User = require('../models/user');
+require('dotenv').config();
 
 
 // Sanitize the inputs then attempt to login
@@ -21,12 +22,16 @@ async function register(username, password) {
     username: username
   };
 
-  if (password.length < 8) {
-    console.warn("Not enforcing longer than 8 character passwords for ease of testing");
+  if (password.length < process.env.PW_LENGTH) {
+    console.warn("Not enforcing longer than "+
+                 process.env.PW_LENGTH+
+                 " character passwords for ease of testing");
   }
 
-  if (username.length < 8) {
-    console.warn("Not enforcing longer than 8 character usernames for ease of testing");
+  if (username.length < process.env.USER_LENGTH) {
+    console.warn("Not enforcing longer than "+
+                 process.env.USER_LENGTH+
+                 " character usernames for ease of testing");
   }
 
 
@@ -52,6 +57,7 @@ async function register(username, password) {
 }
 
 
+// /login api
 router.get('/login', (req, res, next) => {
   res.send({
     method: "POST",
@@ -83,6 +89,7 @@ router.post('/login', (req, res, next) => {
 });
 
 
+// /register api
 router.get('/register', (req, res, next) => {
   res.send({
     method: "POST",
