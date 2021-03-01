@@ -57,6 +57,11 @@ async function register(username, password) {
 }
 
 
+router.get('/', (req, res, next) => {
+  res.send("This is an API");
+});
+
+
 // /login api
 router.get('/login', (req, res, next) => {
   res.send({
