@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import env from "react-dotenv";
 
 import './Register.css';
 
 
 // Utilizes the API to register a new user
 async function registerUser(creds) {
-  return fetch('https://localhost:3080/register', {
+  return fetch(env.API_URL+'/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

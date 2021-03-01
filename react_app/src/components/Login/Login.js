@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Token from "../App/Token";
+import env from "react-dotenv";
 
 import './Login.css';
 
@@ -7,7 +8,7 @@ import './Login.css';
 // Utilizes the API to retrieve a login token
 async function loginUser(creds) {
   console.warn("Currenty not validating login tokens on the server. Any non-null token is accepted");
-  return fetch('https://localhost:3080/login', {
+  return fetch(env.API_URL+'/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
