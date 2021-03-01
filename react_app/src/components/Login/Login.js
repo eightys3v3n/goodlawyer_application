@@ -36,8 +36,6 @@ export default function Login({ setToken }) {
       password
     });
 
-    console.log(res);
-
     if (res.success) {
       setToken(res.token);
       alert("Logged in successfully");
