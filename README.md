@@ -16,6 +16,7 @@ Currently the project is configured to connect without credentials so make sure 
 - Optionally open port 3080
 
 ### React Website
+- Change the API server url in both components/Login/Login.js and components/Register/Register.js. While I would like to put them in the .env file I couldn't get it figured out.
 - From inside react_app do `npm install .`
 
 #### Development Build
